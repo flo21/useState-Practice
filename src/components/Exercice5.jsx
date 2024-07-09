@@ -1,15 +1,28 @@
+import { useState } from "react";
 import Exercice from "./container/Exercice";
 
 export default function Exercice5() {
-  const list = [
+  
+
+  // 1. Crée un state pour avoir en mémoire la liste d'éléments.
+
+  const [list, setList] = useState([
     "Se laver",
     "Sortir les poubelles",
     "Avoir un élevage de poules",
-  ];
+  ]);
 
-  // 1. Crée un state pour avoir en mémoire la liste d'éléments.
   // 2. Crée un state pour gérer la valeur de l'input .
+
+  const [input, setInput] = useState();
   // 3. Ajoute un nouvel élément à la liste en utilisant la valeur de l'input.
+
+  const addToList = () => {
+    if (input.trim() !== "") {
+      setList([...list, input]);
+      setInput("");
+    }
+  };
 
   return (
     <Exercice>
@@ -20,8 +33,12 @@ export default function Exercice5() {
       </p>
       <div className="solution">
         <div>
-          <input type="text" />
-          <button>Ajouter</button>
+          <input 
+          type="text" 
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          />
+          <button onClick={addToList}>Ajouter</button>
           <table>
             <thead>
               <tr>
